@@ -1,0 +1,42 @@
+Context-Switch Overhead Debugging
+Answer
+Given
+Context Switches = 20,000/sec
+
+Average Burst Time = 2 ms
+
+Time Quantum = 1 ms
+
+I/O Wait Frequency = Very High
+Debug Analysis
+The time quantum (1 ms) is smaller than the average CPU burst time (2 ms).
+Threads are preempted before completing their execution.
+Very frequent I/O operations cause threads to enter the waiting state and resume often.
+This leads to a large number of context switches, increasing CPU overhead and reducing system performance.
+Root Cause
+Small Time Quantum
+        +
+High I/O Wait Frequency
+        ↓
+Frequent Context Switching
+        ↓
+High CPU Overhead
+Optimizations
+
+1. Increase the Time Quantum
+
+Increase the time quantum (e.g., from 1 ms to 4 ms) so that threads can complete more work before being preempted.
+This reduces the number of context switches.
+
+2. Optimize I/O Operations
+
+Use asynchronous I/O.
+Buffer or batch I/O requests to reduce the frequency of blocking and waiting.
+Result
+Context Switches Reduced
+
+CPU Overhead Reduced
+
+Improved Throughput
+
+Better Server Performance
