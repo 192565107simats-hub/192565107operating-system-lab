@@ -1,0 +1,45 @@
+2. CPU Utilization Problem
+Answer
+Problem
+
+A system shows low CPU utilization (30%) even though processes are ready.
+
+Scheduler log:
+
+Ready → Waiting → Ready → Waiting → Ready ...
+Debug Analysis
+The processes repeatedly move between the Ready and Waiting states.
+This indicates that the processes are I/O-bound, meaning they frequently request input/output operations.
+While waiting for I/O to complete, the CPU remains idle, resulting in low CPU utilization.
+Root Cause
+I/O-bound Processes
+        ↓
+Frequent I/O Requests
+        ↓
+Processes Enter Waiting State
+        ↓
+CPU Remains Idle
+        ↓
+Low CPU Utilization (30%)
+System-Level Optimization
+
+1. Increase Multiprogramming
+
+Load more CPU-bound processes into memory.
+While one process waits for I/O, another process can use the CPU.
+
+2. Use Asynchronous I/O
+
+Allow processes to continue execution without blocking during I/O operations.
+
+3. Improve CPU Scheduling
+
+Use scheduling algorithms such as Multilevel Feedback Queue (MLFQ) or Round Robin with an appropriate time quantum to improve CPU usage.
+Result
+CPU Utilization Increased
+
+CPU Idle Time Reduced
+
+Improved System Throughput
+
+Better Overall Performance
