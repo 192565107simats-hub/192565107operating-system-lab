@@ -1,0 +1,42 @@
+Q3. Memory Bottleneck Debugging
+Answer
+Memory Map
+Code  : 5 MB
+
+Heap  : 150 MB
+
+Stack : 1 MB × 25 Threads = 25 MB
+
+Total Memory Used = 180 MB
+
+Physical RAM Available = 2 GB
+Debug Analysis
+Although the system has 2 GB of RAM, the multi-threaded program experiences frequent page faults.
+The large heap (150 MB) and 25 threads accessing memory simultaneously reduce memory locality.
+As a result, the operating system frequently loads required pages from disk into RAM, causing page faults and slowing execution.
+Root Cause
+Large Heap Usage
+        +
+Multiple Threads
+        +
+Poor Memory Locality
+        ↓
+Frequent Page Faults
+        ↓
+Performance Degradation
+Optimizations
+1. Reduce Heap Memory Usage
+Free unused memory.
+Reuse allocated memory.
+Use memory pools to reduce unnecessary allocations.
+2. Optimize Thread Usage
+Use a thread pool instead of creating many threads.
+Reduce stack size per thread if possible.
+Result
+Page Faults Reduced
+
+Memory Usage Optimized
+
+Execution Speed Improved
+
+Overall Performance Increased
