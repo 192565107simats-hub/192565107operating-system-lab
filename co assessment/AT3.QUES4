@@ -1,0 +1,41 @@
+Starvation Debugging
+Answer
+Queue Structure
+Q1 → Interactive (Highest Priority)
+
+Q2 → System
+
+Q3 → Batch (FCFS)
+
+P5 belongs to Q3
+Debug Analysis
+Process P5 is in the Q3 (Batch) queue.
+The scheduler always executes processes in Q1 first, followed by Q2.
+Since new interactive and system processes keep arriving, Q3 is never selected.
+As a result, P5 keeps waiting indefinitely and never gets CPU time.
+Root Cause
+Q1 (Interactive)
+        ↓
+Executed First
+        ↓
+Q2 (System)
+        ↓
+Executed Next
+        ↓
+P5 in Q3
+        ↓
+Keeps Waiting
+        ↓
+Starvation
+Optimization
+
+Use Aging
+
+Gradually increase the priority of a process that has been waiting for a long time.
+Eventually, P5 is promoted to a higher-priority queue and gets CPU time.
+Result
+Starvation Eliminated
+
+Fair CPU Scheduling
+
+All Processes Receive CPU Time
