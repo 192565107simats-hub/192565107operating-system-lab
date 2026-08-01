@@ -1,0 +1,63 @@
+Q1. Deadlock Debugging (Code Trace)
+Answer
+Pseudo Code
+// Process P1
+lock(R1);
+wait(100 ms);
+lock(R2);
+critical section;
+unlock(R2);
+unlock(R1);
+
+// Process P2
+lock(R2);
+wait(100 ms);
+lock(R1);
+critical section;
+unlock(R1);
+unlock(R2);
+Debug Analysis
+Process P1 locks R1 and waits for R2.
+Process P2 locks R2 and waits for R1.
+Each process holds one resource while waiting for the other resource.
+Neither process can continue, resulting in an infinite wait.
+Condition Causing Deadlock
+
+The deadlock occurs because of Circular Wait.
+
+Process	Resource Held	Resource Waiting For
+P1	R1	R2
+P2	R2	R1
+
+This satisfies all four necessary conditions for deadlock:
+
+Mutual Exclusion
+Hold and Wait
+No Preemption
+Circular Wait
+Optimization
+
+To eliminate the deadlock without changing the process logic, both processes should acquire resources in the same order.
+
+// Process P1
+lock(R1);
+lock(R2);
+critical section;
+unlock(R2);
+unlock(R1);
+
+// Process P2
+lock(R1);
+lock(R2);
+critical section;
+unlock(R2);
+unlock(R1);
+
+Alternatively, trylock() with timeout can be used to avoid indefinite waiting.
+
+Result
+Deadlock Eliminated
+
+Both processes execute successfully.
+
+No Circular Wait occurs
